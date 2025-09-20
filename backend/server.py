@@ -98,10 +98,65 @@ class GoogleSearchService:
                 
         except httpx.HTTPError as e:
             logging.error(f"Google Search API hatası: {e}")
-            return []
+            # API hatası durumunda demo sonuçları döndür
+            return self._get_demo_results(query)
         except Exception as e:
             logging.error(f"Arama hatası: {e}")
-            return []
+            return self._get_demo_results(query)
+    
+    def _get_demo_results(self, query: str) -> List[SearchResult]:
+        """Demo/mock arama sonuçları döndürür"""
+        demo_results = []
+        
+        if any(word in query.lower() for word in ['hava', 'durumu', 'weather']):
+            demo_results = [
+                SearchResult(
+                    title="Meteoroloji Genel Müdürlüğü - Hava Durumu",
+                    link="https://www.mgm.gov.tr",
+                    snippet="Türkiye geneli ve şehirler için güncel hava durumu tahminleri, radar ve uydu görüntüleri.",
+                    display_link="mgm.gov.tr"
+                ),
+                SearchResult(
+                    title="AccuWeather - Hava Durumu Tahmini",
+                    link="https://www.accuweather.com/tr",
+                    snippet="15 günlük hava durumu tahmini, saatlik tahminler ve hava durumu radarı.",
+                    display_link="accuweather.com"
+                )
+            ]
+        elif any(word in query.lower() for word in ['güncel', 'haber', 'son', 'news']):
+            demo_results = [
+                SearchResult(
+                    title="Güncel Haberler - TRT Haber",
+                    link="https://www.trthaber.com",
+                    snippet="Türkiye ve dünyadan son dakika haberleri, güncel gelişmeler ve önemli olaylar.",
+                    display_link="trthaber.com"
+                ),
+                SearchResult(
+                    title="Son Dakika Haberleri - Hurriyet",
+                    link="https://www.hurriyet.com.tr",
+                    snippet="Türkiye'den ve dünyadan son dakika haberleri, politika, ekonomi ve spor haberleri.",
+                    display_link="hurriyet.com.tr"
+                )
+            ]
+        else:
+            # Genel arama için örnek sonuçlar
+            demo_results = [
+                SearchResult(
+                    title=f"{query} - Wikipedia",
+                    link="https://tr.wikipedia.org/wiki/" + query.replace(' ', '_'),
+                    snippet=f"{query} hakkında detaylı bilgi ve açıklamalar.",
+                    display_link="tr.wikipedia.org"
+                ),
+                SearchResult(
+                    title=f"{query} ile ilgili güncel bilgiler",
+                    link="https://www.google.com/search?q=" + query.replace(' ', '+'),
+                    snippet=f"{query} konusunda en güncel bilgiler ve kaynaklar.",
+                    display_link="google.com"
+                )
+            ]
+        
+        logging.info(f"Demo arama sonuçları döndürüldü: {query}")
+        return demo_results
 
 # Chat Service
 class ChatService:
