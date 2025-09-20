@@ -101,3 +101,131 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: |
+  Sen bir ChatGPT tarzı chatbotsun ama kullanıcıya güncel ve doğru bilgi vermek için gerektiğinde Google'dan arama yapabiliyorsun. Kullanıcının sorusunu anladıktan sonra:
+  1. Eğer soruya kendi bilgi tabanınla yeterince doğru yanıt verebiliyorsan, doğrudan cevap ver.
+  2. Eğer sorunun yanıtı güncel veya spesifik bir web bilgisi gerektiriyorsa:
+     a. Google API üzerinden hızlıca arama yap.
+     b. En güvenilir ve özet bilgiyi seç.
+     c. Kullanıcıya anlaşılır ve kısa bir şekilde sun.
+  3. Cevabını her zaman net ve açıklayıcı yap, gerekirse örnek veya adım adım rehber ver.
+  4. Soruları kibar, anlaşılır ve samimi bir üslupla yanıtla.
+  5. Kullanıcıya kaynak veya link verebiliyorsan mutlaka göster.
+
+backend:
+  - task: "Emergent LLM Integration Setup"
+    implemented: false
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Setting up emergentintegrations library and LLM chat functionality"
+
+  - task: "Google Custom Search API Integration"
+    implemented: false
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Setting up Google Custom Search API for web search functionality"
+
+  - task: "Chat Session Management"
+    implemented: false
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high" 
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implementing session-based chat with message history in MongoDB"
+
+  - task: "Smart Search Decision Logic"
+    implemented: false
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Logic to determine when to use LLM knowledge vs Google search"
+
+  - task: "Chat API Endpoints"
+    implemented: false
+    working: "NA" 
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "RESTful endpoints for chat functionality with proper error handling"
+
+frontend:
+  - task: "Turkish Chat Interface"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "User-friendly Turkish language chat interface"
+
+  - task: "Message History Display"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/ChatInterface.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Display chat messages with proper formatting and source links"
+
+  - task: "Session Management Frontend"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/ChatInterface.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Frontend session management for contextual conversations"
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 0
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Emergent LLM Integration Setup"
+    - "Google Custom Search API Integration"
+    - "Chat API Endpoints"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Starting ChatGPT-style chatbot implementation with Google search capabilities. User preferences: Emergent LLM key, Google Custom Search API, Turkish interface, session-based anonymous usage. Beginning with backend LLM and search integrations."
